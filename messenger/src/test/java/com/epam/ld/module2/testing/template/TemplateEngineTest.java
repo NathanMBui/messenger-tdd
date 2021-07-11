@@ -9,7 +9,7 @@ public class TemplateEngineTest {
 
     @Test
     public void testGenerateMessage() {
-        Template template = new Template("Subject: ${subject}\n\nBody: {body}\n\nSignature: ${signature}");
+        Template template = new Template("Subject: ${subject}\n\nBody: {body}\n\nSignature: ${signature}", "${", "}");
         Client client = new Client("abc@xyz.com");
         client.setSubject("aSubject");
         client.setBody("aBody");
