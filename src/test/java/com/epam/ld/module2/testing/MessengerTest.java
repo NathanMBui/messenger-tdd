@@ -4,7 +4,10 @@ import com.epam.ld.module2.testing.mailserver.ConsoleMailServer;
 import com.epam.ld.module2.testing.mailserver.FileMailServer;
 import com.epam.ld.module2.testing.template.Template;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mock;
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

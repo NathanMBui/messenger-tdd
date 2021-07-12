@@ -7,6 +7,8 @@ import com.epam.ld.module2.testing.mailserver.MailServer;
 import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TemplateEngine;
 
+import java.io.File;
+
 /**
  * The type Messenger.
  */
@@ -45,14 +47,23 @@ public class Messenger {
         if (args != null && args.length > 1) {
             String inputFile = args[0];
             String outputFile = args[1];
-            mailServer = new FileMailServer(inputFile, outputFile);
+            mailServer = new FileMailServer(new File(inputFile), new File(outputFile));
         } else {
             mailServer = new ConsoleMailServer();
         }
         messenger = new Messenger(mailServer, new TemplateEngine());
     }
 
+    public void run() {
+        System.out.println("running");
+        Template template = mailServer.readTemplate();
+    }
+
     public MailServer getMailServer() {
         return mailServer;
+    }
+
+    public void setMailServer(MailServer mailServer) {
+        this.mailServer = mailServer;
     }
 }
