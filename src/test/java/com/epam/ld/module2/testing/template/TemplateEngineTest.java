@@ -19,4 +19,17 @@ public class TemplateEngineTest {
 
         assertEquals("Subject: aSubject\n\nBody: aBody\n\nSignature: aSignature", message);
     }
+
+    @Test
+    public void testThrowExceptionWhenAtLeastOnePlaceHolderValueNotProvided() {
+        Template template = new Template("Subject: ${subject}\n\nBody: ${body}\n\nSignature: ${signature}");
+        Client client = new Client("abc@xyz.com");
+        client.setSubject("aSubject");
+        client.setBody("aBody");
+        TemplateEngine engine = new TemplateEngine();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            engine.generateMessage(template, client);
+        }, "Expected generateMessage() to throw, but it didn't");
+    }
 }
