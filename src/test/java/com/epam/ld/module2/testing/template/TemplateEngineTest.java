@@ -38,4 +38,16 @@ public class TemplateEngineTest {
                 () -> engine.generateMessage(template, client),
                 "Expected generateMessage() to throw, but it didn't");
     }
+
+    @Test
+    public void testIgnoreValuesForVariablesArentFoundInTemplate() {
+        template = new Template("Subject: ${subject}\n\nBody: ${body}");
+        client.setSubject("aSubject");
+        client.setBody("aBody");
+        client.setSignature("aSignature");
+
+        String message = engine.generateMessage(template, client);
+
+        assertEquals("Subject: aSubject\n\nBody: aBody", message);
+    }
 }
