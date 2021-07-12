@@ -1,9 +1,9 @@
-package com.epam.ld.module2.testing;
+package com.epam.ld.module2.testing.mailserver;
 
 /**
  * Mail server class.
  */
-public class MailServer {
+public class ConsoleMailServer implements MailServer {
 
     /**
      * Send notification.
@@ -11,6 +11,8 @@ public class MailServer {
      * @param addresses  the addresses
      * @param messageContent the message content
      */
+    @Override
     public void send(String addresses, String messageContent) {
+
     }
 }

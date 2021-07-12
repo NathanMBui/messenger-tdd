@@ -1,6 +1,9 @@
 package com.epam.ld.module2.testing;
 
 
+import com.epam.ld.module2.testing.mailserver.ConsoleMailServer;
+import com.epam.ld.module2.testing.mailserver.FileMailServer;
+import com.epam.ld.module2.testing.mailserver.MailServer;
 import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TemplateEngine;
 
@@ -8,6 +11,8 @@ import com.epam.ld.module2.testing.template.TemplateEngine;
  * The type Messenger.
  */
 public class Messenger {
+    public static Messenger messenger;
+
     private MailServer mailServer;
     private TemplateEngine templateEngine;
 
@@ -33,5 +38,21 @@ public class Messenger {
         String messageContent =
             templateEngine.generateMessage(template, client);
         mailServer.send(client.getAddresses(), messageContent);
+    }
+
+    public static void main(String[] args) {
+        MailServer mailServer;
+        if (args != null && args.length > 1) {
+            String inputFile = args[0];
+            String outputFile = args[1];
+            mailServer = new FileMailServer(inputFile, outputFile);
+        } else {
+            mailServer = new ConsoleMailServer();
+        }
+        messenger = new Messenger(mailServer, new TemplateEngine());
+    }
+
+    public MailServer getMailServer() {
+        return mailServer;
     }
 }
