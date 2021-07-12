@@ -50,4 +50,15 @@ public class TemplateEngineTest {
 
         assertEquals("Subject: aSubject\n\nBody: aBody", message);
     }
+
+    @Test
+    public void testSpecialValueWithPlaceholderFormat() {
+        client.setSubject("${aSubject}");
+        client.setBody("aBody");
+        client.setSignature("aSignature");
+
+        String message = engine.generateMessage(template, client);
+
+        assertEquals("Subject: ${aSubject}\n\nBody: aBody\n\nSignature: aSignature", message);
+    }
 }
