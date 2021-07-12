@@ -29,4 +29,13 @@ public class MailServerTest {
 
         assertEquals("Subject: ${subject}\nBody: ${body}", fileMailServer.readTemplate().getTemplate());
     }
+
+    @Test
+    public void testReadTemplateShouldBeCalled() {
+        Messenger.main(new String[] {"inputFile", "outputFile"});
+        Messenger.messenger.setMailServer(mock(MailServer.class));
+        Messenger.messenger.run();
+
+        verify(Messenger.messenger.getMailServer()).readTemplate();
+    }
 }
