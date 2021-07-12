@@ -17,15 +17,9 @@ public class TemplateEngine {
     public String generateMessage(Template template, Client client) {
         validateClient(client);
         String content = template.getTemplate();
-        System.out.println("content: " + content);
         content = content.replace("${subject}", client.getSubject());
-
-        System.out.println("content: " + content);
         content = content.replace("${body}", client.getBody());
-
-        System.out.println("content: " + content);
         content = content.replace("${signature}", client.getSignature());
-        System.out.println("content: " + content);
         return content;
     }
 
