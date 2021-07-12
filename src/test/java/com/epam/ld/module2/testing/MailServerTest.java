@@ -2,6 +2,7 @@ package com.epam.ld.module2.testing;
 
 import com.epam.ld.module2.testing.mailserver.FileMailServer;
 import com.epam.ld.module2.testing.mailserver.MailServer;
+import com.epam.ld.module2.testing.template.TemplateEngine;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -12,8 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
 
 public class MailServerTest {
 
@@ -28,14 +27,5 @@ public class MailServerTest {
         FileMailServer fileMailServer = new FileMailServer(templateFile, outputFile);
 
         assertEquals("Subject: ${subject}\nBody: ${body}", fileMailServer.readTemplate().getTemplate());
-    }
-
-    @Test
-    public void testReadTemplateShouldBeCalled() {
-        Messenger.main(new String[] {"inputFile", "outputFile"});
-        Messenger.messenger.setMailServer(mock(MailServer.class));
-        Messenger.messenger.run();
-
-        verify(Messenger.messenger.getMailServer()).readTemplate();
     }
 }

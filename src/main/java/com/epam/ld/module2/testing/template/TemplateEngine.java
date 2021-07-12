@@ -15,7 +15,7 @@ public class TemplateEngine {
      * @return the string
      */
     public String generateMessage(Template template, Client client) {
-        validateClient(client);
+        validate(client, template);
         String content = template.getTemplate();
         content = content.replace("${subject}", client.getSubject());
         content = content.replace("${body}", client.getBody());
@@ -23,8 +23,10 @@ public class TemplateEngine {
         return content;
     }
 
-    public void validateClient(Client client) {
-        if (StringUtils.anyNullOrEmpty(client.getSubject(), client.getBody(), client.getSignature())) {
+    public void validate(Client client, Template template) {
+        if ((template.getTemplate().contains("${subject}") && StringUtils.isNullOrEmpty(client.getSubject())
+        || (template.getTemplate().contains("${body}") && StringUtils.isNullOrEmpty(client.getBody())
+        || (template.getTemplate().contains("${signature}") && StringUtils.isNullOrEmpty(client.getSignature()))))) {
             throw new IllegalArgumentException("At least one value is not provided");
         }
     }

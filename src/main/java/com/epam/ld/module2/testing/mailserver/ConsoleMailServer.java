@@ -1,5 +1,6 @@
 package com.epam.ld.module2.testing.mailserver;
 
+import com.epam.ld.module2.testing.Client;
 import com.epam.ld.module2.testing.template.Template;
 
 /**
@@ -24,7 +25,7 @@ public class ConsoleMailServer implements MailServer {
     }
 
     @Override
-    public String[] readValue() {
-        return new String[0];
+    public Client readClient() {
+        return new Client("abc@xyz.com");
     }
 }

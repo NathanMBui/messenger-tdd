@@ -55,8 +55,9 @@ public class Messenger {
     }
 
     public void run() {
-        System.out.println("running");
+        Client client = mailServer.readClient();
         Template template = mailServer.readTemplate();
+        sendMessage(client, template);
     }
 
     public MailServer getMailServer() {
@@ -65,5 +66,13 @@ public class Messenger {
 
     public void setMailServer(MailServer mailServer) {
         this.mailServer = mailServer;
+    }
+
+    public void setTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
+
+    public TemplateEngine getTemplateEngine() {
+        return templateEngine;
     }
 }
